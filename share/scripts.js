@@ -19,7 +19,6 @@ class NavItem {
         item += '>';
         item += this.navBody;
         item += '</a>';
-        // `href="${this.navURL}" class="${this.navClass}" onclick="${this.OnCLick}">${this.navBody}</i></a>`
         return item;
     }
 }
@@ -30,7 +29,6 @@ let navCont = document.getElementById("navContainer");
 function generateNavContents (a,b = new NavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()')) {
     let navArr = [];
     let navBtn = b;
-    // let navItemBtn = new NavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()');
     navArr = a.map((item) => {
         return item.makeItem();
     })
@@ -39,7 +37,7 @@ function generateNavContents (a,b = new NavItem('<i class="fa fa-bars"></i>','ja
 }
 
 /*  Toggle between adding and removing the "responsive" class
-    to topnav when the user clicks on the icon */
+    to top-navbar when the user clicks on the icon */
 function navBarToggle() {
     if (topNavbar.className === "top-navbar") {
         topNavbar.className += " responsive";
@@ -53,6 +51,7 @@ function navBarToggle() {
     }
 }
 
+// Generate the nav contents with the code below:
 // let navItems = [
 //     new NavItem('Home','#Home'),
 //     new NavItem('About','#About'),
