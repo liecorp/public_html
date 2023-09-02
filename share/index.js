@@ -54,8 +54,33 @@ let contentObjects = [
     new PageItem('div',pageBlocks[2],'primary-banner'),
 ]
 
-generateContent(nginxWelcome,contentObjects[0])
-generateContent(infoPanel,contentObjects[1])
-generateContent(primaryBanner,contentObjects[2])
+let newsClasses = makeNewsItemClass('content-news-head','content-timestamp','content-news-body');
+let newsTitles = [
+    'ansible-core &gt;= 2.15.3-1 update may require manual intervention',
+];
+let newsUrls = [
+    "/news/ansible-core-2153-1-update-may-require-manual-intervention/",
+]
+let newsStamps = [
+    new Date('2023-08-19 03:25:22 UTC+8'),
+];
+let newsBodies  = [
+    `<p>As of <code>ansible-core 2.15.3</code>, upstream moved documentation and examples to a separate <a href="https://github.com/ansible/ansible-documentation">dedicated repository</a> (see the <a href="https://github.com/ansible/ansible/blob/v2.15.3/changelogs/CHANGELOG-v2.15.rst#minor-changes">related changelogs</a>).<br />
+    This means that, starting from version <code>2.15.3</code> the <code>ansible-core</code> package will stop shipping documentation and a default configuration example under <code>/etc/ansible/ansible.cfg</code>.</p>
+    <p>Regarding the documentation, it is available online: <a href="https://docs.ansible.com/">https://docs.ansible.com/</a><br />
+    As for the configuration file, as explained in the <a href="https://wiki.archlinux.org/title/Ansible#Configuration">wiki</a>, a base config can be generated with the following command:</p>
+    <p><code>ansible-config init --disabled &gt; ansible.cfg</code></p>
+    <p>After updating from <code>ansible-core</code> &lt;= <code>2.15.2-1</code> to &gt;= <code>2.15.3-1</code>, everyone using a <strong>custom</strong> global Ansible configuration file stored under <code>/etc/ansible/ansible.cfg</code> will have their configuration saved as a <code>pacsave</code> file.<br />
+    To restore it, run the following command:</p>
+    <p><code>mv /etc/ansible/ansible.cfg.pacsave /etc/ansible/ansible.cfg</code></p>`,
+]
+newsItems = document.getElementById('newsItems');
+newsContent = new NewsItem(newsTitles[0],newsStamps[0],newsBodies[0],newsUrls[0]);
+
+generateNewsItem(newsItems,newsContent);
+
+generateContent(nginxWelcome,contentObjects[0]);
+generateContent(infoPanel,contentObjects[1]);
+generateContent(primaryBanner,contentObjects[2]);
 
 generateContentNav(topNavbar,navItems,navItemBtn);
