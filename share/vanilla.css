@@ -19,8 +19,14 @@ body {
     padding: 0.65em;
 }
 
+.panel-left {
+    flex: 6 0 300px;
+}
+.panel-right {
+    flex: 1 1 200px;
+}
+
 .content-container #contentBlockPrimary {
-    flex: 6 0;
     font-size: 0.9em;
     padding: 0.65em;
     margin: 0.8em;
@@ -30,7 +36,6 @@ body {
     border-color: lightblue}
 
 .content-container #contentBlockSecondary {
-    flex: 1 1;
     font-size: 0.9em;
     padding: 0.65em;
     margin: 0.8em;
@@ -95,8 +100,6 @@ body {
     should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {
     .content-container {
-        margin:auto;
-        padding: 10%;
         flex-direction: column;
     }
     .content-container #contentBlockPrimary {
