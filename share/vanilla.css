@@ -6,6 +6,20 @@ body {
     line-height: 1.2em;
 }
 
+code {
+    background-color: lightyellow;
+}
+
+pre {
+    color: #333;
+    background-color: lightyellow;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightblue;
+    padding: 0.8em;
+    margin: 1em;
+}
+
 .heading {
     border-bottom: 1px solid gray;
     padding-bottom: 0.2em;
