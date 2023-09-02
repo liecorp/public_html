@@ -67,9 +67,6 @@ class NewsItem extends PageItem {
         this.itemTitle = itemTitle;
         this.itemDate = itemDate;
         this.itemURL = itemURL;
-        // if (!typeof(this.itemClass) === 'object') {
-        //     this.itemClass = makeNewsItemClass('content-news-head','content-timestamp','content-news-body');
-        // }
     }
     getClass(a) {
         let item;
@@ -175,9 +172,18 @@ function generateContent(id,obj) {
 }
 
 function generateNewsItem(id,obj) {
-    let item;
-    if (typeof(id) === 'object' && obj instanceof NewsItem) {
-        item = obj.makeItem();
+    let item, itemBasket = [];
+    if (typeof(id) === 'object') {
+        if (obj instanceof NewsItem) {
+            item = obj.makeItem();
+        } else {
+            itemBasket = obj.map((n) => {
+                if (n instanceof NewsItem) {
+                    return n.makeItem()
+                }
+            });
+        }
+        item = itemBasket.join('');
     }
     return id.innerHTML = item;
 }
