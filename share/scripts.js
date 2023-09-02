@@ -44,6 +44,29 @@ class PageItem {
     }
 }
 
+class PageNavItem extends PageItem {
+    constructor(itemBody,itemURL = '#', itemClass = null, itemOnClick = null, itemElement = 'a') {
+        super(itemElement, itemBody, itemClass);
+        this.itemURL = itemURL;
+        this.itemOnClick = itemOnClick;
+    }
+    makeHref() {
+        if (typeof(this.itemURL) === 'string') {
+            return `href="${this.itemURL}"`;
+        }
+    }
+    makeOnClick() {
+        if (typeof(this.itemOnClick) === 'string') {
+            return `onclick="${this.itemOnClick}"`;
+        }
+    }
+    makeProps() {
+        let props = [];
+        props.push(this.makeHref(),this.makeClass(),this.makeOnClick());
+        return props.join(' ');
+    }
+}
+
 class NavItem {
     constructor(navBody,navURL = '#',navClass = null,navOnClick = null) {
         this.navBody = navBody;
