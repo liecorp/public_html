@@ -1,6 +1,7 @@
 body {
-    margin-top: 80px;
-    font-family: helvetica,sans-serif;
+    margin-top: 4.5em;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color:#333;
     background-color: lightcyan;
 }
 
@@ -14,35 +15,28 @@ body {
     justify-content: center;
     align-items: flex-start;
     align-content: space-between;
-    /* margin-left: 10em;
-    margin-right: 10em; */
-    padding: 0.65em;
+    margin: 1em;
+    font-size: 0.8em;
 }
 
 .panel-left {
-    flex: 6 0 300px;
+    flex: 6 0 19em;
 }
+
 .panel-right {
-    flex: 1 1 200px;
+    flex: 1 1 15em;
 }
 
-.content-container #contentBlockPrimary {
-    font-size: 0.9em;
-    padding: 0.65em;
-    margin: 0.8em;
+.content-container .content-box {
     background-color: aqua;
     border-style: solid;
     border-width: 1px;
-    border-color: lightblue}
+    border-color: lightblue
+}
 
-.content-container #contentBlockSecondary {
-    font-size: 0.9em;
-    padding: 0.65em;
-    margin: 0.8em;
-    background-color: aqua;
-    border-style: solid;
-    border-width: 1px;
-    border-color: lightblue;
+.content-container .content {
+    padding: 0.8em;
+    margin: 1em;
 }
 
 .nav-container {
@@ -59,10 +53,10 @@ body {
 
 .nav-logo {
     display: block;
-    max-height: 28px;
+    max-height: 1.75em;
     margin-left: 0px;
     margin-right: auto;
-    padding: 16px;
+    padding: 1em;
 }
 
 .nav-icon {
@@ -79,15 +73,17 @@ body {
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 20px;
+    padding: 1.25em;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 1em;
+    font-weight: bold;
 }
 
 .top-navbar a:hover {
     background-color: #ddd;
-    color: black;
-    border-radius: 10px;
+    color: #333;
+    text-decoration: underline;
+    border-radius: 0.625em;
     transition-duration: 350ms;
 }
 
@@ -102,10 +98,7 @@ body {
     .content-container {
         flex-direction: column;
     }
-    .content-container #contentBlockPrimary {
-        flex: auto;
-    }
-    .content-container #contentBlockSecondary {
+    .panel-left, .panel-right {
         flex: auto;
     }
     .top-navbar a {
