@@ -44,6 +44,75 @@ class PageItem {
     }
 }
 
+function makeNewsItemClass(classTitle,classStamp,classBody) {
+    let itemClass = {
+        'title': classTitle,
+        'stamp': classStamp,
+        'body': classBody,
+    }
+    return itemClass;
+}
+
+class NewsItem extends PageItem {
+    constructor(
+        itemTitle,
+        itemDate,
+        itemBody,
+        itemURL = '#',
+        itemClass = makeNewsItemClass('content-news-head','content-timestamp','content-news-body'),
+        itemElement = 'div'
+        )
+    {
+        super(itemElement,itemBody,itemClass);
+        this.itemTitle = itemTitle;
+        this.itemDate = itemDate;
+        this.itemURL = itemURL;
+        // if (!typeof(this.itemClass) === 'object') {
+        //     this.itemClass = makeNewsItemClass('content-news-head','content-timestamp','content-news-body');
+        // }
+    }
+    getClass(a) {
+        let item;
+        if (this.itemClass[a]) {
+            item = ` class="${this.itemClass[a]}"`;
+        } else {
+            item = '';
+        }
+        return item;
+    }
+    makeTitle() {
+        let title = this.itemTitle, href  = this.itemURL, itemClass = this.getClass('title');
+        return `<h4${itemClass}><a href="${href}" title="View full article: ${title}">${title}</a></h4>`;
+    }
+    makeDate() {
+        let date = this.itemDate, isoString, itemClass = this.getClass('stamp');
+        if (!date instanceof Date) {
+            date = new Date(date.toString());
+        }
+
+        // format date into ISO string, see:
+        // https://stackoverflow.com/a/29774197/12571203
+        const offset = date.getTimezoneOffset();
+        date = new Date(date.getTime() - (offset*60*1000));
+        isoString = date.toISOString().split('T')[0];
+
+        return `<p${itemClass}>${isoString}</p>`;
+    }
+    makeBody() {
+        let fullDiv, body = this.itemBody, itemClass = this.getClass('body');
+        return fullDiv = `<div${itemClass}>${body}</div>`;
+    }
+    makeItem() {
+        let item = [];
+        item.push(
+            this.makeTitle(),
+            this.makeDate(),
+            this.makeBody()
+            )
+        return item.join('');
+    }
+}
+
 class PageNavItem extends PageItem {
     constructor(itemBody,itemURL = '#', itemClass = null, itemOnClick = null, itemElement = 'a') {
         super(itemElement, itemBody, itemClass);
@@ -97,9 +166,17 @@ function generateContentNav(id,objArr,btn = 'default') {
     return targetId.innerHTML = navArr.join('');
 }
 
-    function generateContent(id,obj) {
-        let item;
+function generateContent(id,obj) {
+    let item;
     if (typeof(id) === 'object' && obj instanceof PageItem) {
+        item = obj.makeItem();
+    }
+    return id.innerHTML = item;
+}
+
+function generateNewsItem(id,obj) {
+    let item;
+    if (typeof(id) === 'object' && obj instanceof NewsItem) {
         item = obj.makeItem();
     }
     return id.innerHTML = item;
