@@ -49,6 +49,11 @@ body {
     transition-duration: 350ms;
 }
 
+.top-navbar a.active {
+    background-color: green;
+    color: black;
+}
+
 .top-navbar a.nav-icon {
     display: none;
 }
