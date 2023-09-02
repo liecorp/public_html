@@ -80,6 +80,14 @@ function generateNavContents (a,b = new PageNavItem('<i class="fa fa-bars"></i>'
     return topNavbar.innerHTML = navArr.join('');
 }
 
+function generateContent(id,obj) {
+    let item;
+    if (typeof(id) === 'object' && obj instanceof PageItem) {
+        item = obj.makeItem();
+    }
+    return id.innerHTML = item;
+}
+
 /*  Toggle between adding and removing the "responsive" class
     to top-navbar when the user clicks on the icon */
 function navBarToggle() {
