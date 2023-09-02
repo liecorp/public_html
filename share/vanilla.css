@@ -1,6 +1,43 @@
 body {
     margin-top: 80px;
     font-family: helvetica,sans-serif;
+    background-color: lightcyan;
+}
+
+.heading {
+    border-bottom: 1px solid gray;
+}
+
+.content-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: space-between;
+    /* margin-left: 10em;
+    margin-right: 10em; */
+    padding: 0.65em;
+}
+
+.content-container #contentBlockPrimary {
+    flex: 6 0;
+    font-size: 0.9em;
+    padding: 0.65em;
+    margin: 0.8em;
+    background-color: aqua;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightblue}
+
+.content-container #contentBlockSecondary {
+    flex: 1 1;
+    font-size: 0.9em;
+    padding: 0.65em;
+    margin: 0.8em;
+    background-color: aqua;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightblue;
 }
 
 .nav-container {
@@ -57,6 +94,17 @@ body {
     except for the first one ("Home"). Show the link that contains
     should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {
+    .content-container {
+        margin:auto;
+        padding: 10%;
+        flex-direction: column;
+    }
+    .content-container #contentBlockPrimary {
+        flex: auto;
+    }
+    .content-container #contentBlockSecondary {
+        flex: auto;
+    }
     .top-navbar a {
         display: none;
     }
