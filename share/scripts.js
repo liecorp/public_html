@@ -67,21 +67,38 @@ class PageNavItem extends PageItem {
     }
 }
 
-let topNavbar = document.getElementById("topNavbar");
-let navCont = document.getElementById("navContainer");
+function generateContentNav(id,objArr,btn = 'default') {
+    let itemBtn, sourceObj, targetId, navArr = [];
 
-function generateNavContents (a,b = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()')) {
-    let navArr = [];
-    let navBtn = b;
-    navArr = a.map((item) => {
-        return item.makeItem();
-    })
-    navArr.push(navBtn.makeItem());
-    return topNavbar.innerHTML = navArr.join('');
+    // define itemBtn
+    if (btn === 'default') {
+        itemBtn = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()');
+    } else { itemBtn = btn; }
+
+    // define targetId
+    if (typeof(id) === 'object') {
+        targetId = id;
+    } else if (typeof(id) === 'string') {
+        targetId = document.getElementById(id);
+    }
+
+    // define objArr
+    if (typeof(objArr) === 'object' ) {
+        sourceObj = objArr;
+    }
+
+    // construct nav
+    navArr = sourceObj.map(
+        (item) => {
+            return item.makeItem();
+        }
+        );
+    navArr.push(itemBtn.makeItem());
+    return targetId.innerHTML = navArr.join('');
 }
 
-function generateContent(id,obj) {
-    let item;
+    function generateContent(id,obj) {
+        let item;
     if (typeof(id) === 'object' && obj instanceof PageItem) {
         item = obj.makeItem();
     }
@@ -89,8 +106,10 @@ function generateContent(id,obj) {
 }
 
 /*  Toggle between adding and removing the "responsive" class
-    to top-navbar when the user clicks on the icon */
+to top-navbar when the user clicks on the icon */
 function navBarToggle() {
+    let navCont = document.getElementById("navContainer");
+    let topNavbar = document.getElementById("topNavbar");
     if (topNavbar.className === "top-navbar") {
         topNavbar.className += " responsive";
     } else {

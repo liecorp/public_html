@@ -70,6 +70,6 @@ generateContent(contentBlockSecondary,blockSecondary)
 generateContent(nginxWelcome,blockNginxWelcome)
 
 // If navItemBtn is defined, use:
-generateNavContents(navItems,navItemBtn);
+generateContentNav(topNavbar,navItems,navItemBtn);
 // Otherwise, use:
 // generateNavContents(navItems);

@@ -58,7 +58,4 @@ generateContent(nginxWelcome,contentObjects[0])
 generateContent(infoPanel,contentObjects[1])
 generateContent(primaryBanner,contentObjects[2])
 
-// If navItemBtn is defined, use:
-generateNavContents(navItems,navItemBtn);
-// Otherwise, use:
-// generateNavContents(navItems);
+generateContentNav(topNavbar,navItems,navItemBtn);
