@@ -26,25 +26,20 @@ class PageItem {
         }
     }
     makeElement(prop,body = null) {
-        let element,item = this.itemElement;
-        if (item) {
-            switch (typeof(item)) {
-                case 'string':
-                    element = `<${item} ${prop}>${body}</${item}>`;
-                    break;
-                default:
-                    element = null;
-            }
-            return element;
+        let item = this.itemElement;
+        if (typeof(item) === 'string') {
+            return `<${item} ${prop}>${body}</${item}>`;
         }
         return null;
     }
+    makeProps() {
+        let props = [];
+        props.push(this.makeClass());
+        return props.join(' ');
+    }
     makeItem() {
-        let item, itemProps = [];
-        if (this.itemClass) {
-            itemProps.push(this.makeClass());
-        }
-        item = this.makeElement(itemProps.join(' '),this.itemBody);
+        let item;
+        item = this.makeElement(this.makeProps(),this.itemBody);
         return item;
     }
 }
