@@ -70,7 +70,7 @@ class PageNavItem extends PageItem {
 let topNavbar = document.getElementById("topNavbar");
 let navCont = document.getElementById("navContainer");
 
-function generateNavContents (a,b = new NavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()')) {
+function generateNavContents (a,b = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()')) {
     let navArr = [];
     let navBtn = b;
     navArr = a.map((item) => {
