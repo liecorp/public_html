@@ -45,6 +45,8 @@ body {
 .top-navbar a:hover {
     background-color: #ddd;
     color: black;
+    border-radius: 10px;
+    transition-duration: 350ms;
 }
 
 .top-navbar a.nav-icon {
