@@ -1,3 +1,54 @@
+class PageItem {
+    constructor(itemElement,itemBody = null,itemClass = null) {
+        this.itemElement = itemElement;
+        this.itemBody = itemBody;
+        this.itemClass = itemClass;
+    }
+    makeBody() {
+        if (this.itemBody) {
+            return this.itemBody;
+        }
+    }
+    makeClass() {
+        let classContent;
+        if (this.itemClass) {
+            switch (typeof(this.itemClass)) {
+                case 'array':
+                    classContent = this.itemClass.join('');
+                    break;
+                case 'string':
+                    classContent = this.itemClass;
+                    break;
+                default:
+                    classContent = String(this.itemClass);
+            }
+            return 'class="' + classContent + '"';
+        }
+    }
+    makeElement(prop,body = null) {
+        let element,item = this.itemElement;
+        if (item) {
+            switch (typeof(item)) {
+                case 'string':
+                    element = `<${item} ${prop}>${body}</${item}>`;
+                    break;
+                default:
+                    element = null;
+            }
+            return element;
+        }
+        return null;
+    }
+    makeItem() {
+        let item, itemProps = [];
+        if (this.itemClass) {
+            itemProps.push(this.makeClass());
+        }
+        item = this.makeElement(itemProps.join(' '),this.itemBody);
+        return item;
+    }
+}
+
 class NavItem {
     constructor(navBody,navURL = '#',navClass = null,navOnClick = null) {
         this.navBody = navBody;
@@ -8,10 +59,10 @@ class NavItem {
     makeItem() {
         let item, itemProps = [];
         itemProps.push('href="' + this.navURL + '"');
-        if (this.navClass !== null ) {
+        if (this.navClass) {
             itemProps.push('class="' + this.navClass + '"');
         }
-        if (this.navOnClick !== null ) {
+        if (this.navOnClick) {
             itemProps.push('onclick="' + this.navOnClick + '"');
         }
         item = '<a ';
