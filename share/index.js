@@ -91,19 +91,34 @@ collection:  collection-latexrecommended</code></pre>
     <p>A new metapackage texlive-meta is available to install all subpackages (except for …</p>`,
 ]
 let newsItems = document.getElementById('newsItems');
+let oldNewsItems = document.getElementById('oldNewsItems')
 let newsContent = new NewsItem(newsTitles[0],newsStamps[0],newsBodies[0],newsUrls[0]);
 
-let newsCollections = [];
 
+let oldNews = [
+    makeNewsItemCollection('Git migration announcement','2023-05-15 13:42:11 UTC+7','dummy',"/news/switch-to-the-base-devel-meta-package-requires-manual-intervention/"),
+    makeNewsItemCollection('PHP 8.2 update and introduction of legacy branch','2023-01-13 13:42:11 UTC+7','dummy',"/news/php-82-update-and-introduction-of-legacy-branch/"),
+    makeNewsItemCollection('In memory of Jonathon Fernyhough','2023-01-12 13:42:11 UTC+7','dummy',"/news/in-memory-of-jonathon-fernyhough/"),
+]
+
+let newsCollections = [];
 for ( let i = 0 ; i < newsTitles.length ; i++ ) {
     newsCollections.push(
         new NewsItem(newsTitles[i],newsStamps[i],newsBodies[i],newsUrls[i])
     );
 }
 
+let oldNewsCollections = [];
+for (let i = 0; i < oldNews.length; i++ ) {
+    oldNewsCollections.push(
+        new NewsItem(oldNews[i].title,oldNews[i].stamp,oldNews[i].body,oldNews[i].href)
+    );
+}
+
 // injectHTML(newsItems, generateNewsItem(newsContent));
 
 injectHTML(newsItems,       generateNewsItem(newsCollections));
+injectHTML(oldNewsItems,    generateNewsItem(oldNewsCollections,'list'));
 injectHTML(nginxWelcome,    generateContent(contentObjects[0]));
 injectHTML(infoPanel,       generateContent(contentObjects[1]));
 injectHTML(primaryBanner,   generateContent(contentObjects[2]));
