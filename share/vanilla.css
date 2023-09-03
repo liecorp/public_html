@@ -151,12 +151,6 @@ dl dt {
     padding: 1em;
 }
 
-.nav-logo:hover {
-    background-color: darkslategray;
-    border-radius: 0.625em;
-    transition-duration: 350ms;
-}
-
 .nav-icon {
     display: none;
 }    
@@ -177,7 +171,7 @@ dl dt {
     font-weight: bold;
 }
 
-.top-navbar a:hover {
+.top-navbar a:hover, .nav-logo:hover {
     background-color: darkslategray;
     color: #f2f2f2;
     text-decoration: underline;
