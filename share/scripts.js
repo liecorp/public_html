@@ -133,20 +133,13 @@ class PageNavItem extends PageItem {
     }
 }
 
-function generateContentNav(id,objArr,btn = 'default') {
-    let itemBtn, sourceObj, targetId, navArr = [];
+function generateContentNav(objArr,btn = 'default') {
+    let itemBtn, sourceObj, navArr = [], navItem;
 
     // define itemBtn
     if (btn === 'default') {
         itemBtn = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()');
     } else { itemBtn = btn; }
-
-    // define targetId
-    if (typeof(id) === 'object') {
-        targetId = id;
-    } else if (typeof(id) === 'string') {
-        targetId = document.getElementById(id);
-    }
 
     // define objArr
     if (typeof(objArr) === 'object' ) {
@@ -160,32 +153,45 @@ function generateContentNav(id,objArr,btn = 'default') {
         }
         );
     navArr.push(itemBtn.makeItem());
-    return targetId.innerHTML = navArr.join('');
+
+    return navItem = navArr.join('');
 }
 
-function generateContent(id,obj) {
+function generateContent(obj) {
     let item;
-    if (typeof(id) === 'object' && obj instanceof PageItem) {
+    if (obj instanceof PageItem) {
         item = obj.makeItem();
     }
-    return id.innerHTML = item;
+    return item;
 }
 
-function generateNewsItem(id,obj) {
+function generateNewsItem(obj) {
     let item, itemBasket = [];
-    if (typeof(id) === 'object') {
-        if (obj instanceof NewsItem) {
-            item = obj.makeItem();
-        } else {
-            itemBasket = obj.map((n) => {
-                if (n instanceof NewsItem) {
-                    return n.makeItem()
-                }
-            });
-        }
-        item = itemBasket.join('');
+
+    if (obj instanceof NewsItem) {
+        item = obj.makeItem();
+    } else {
+        itemBasket = obj.map((n) => {
+            if (n instanceof NewsItem) {
+                return n.makeItem()
+            }
+        });
     }
-    return id.innerHTML = item;
+    item = itemBasket.join('');
+
+    return item;
+}
+
+function injectHTML(id,item) {
+    let target;
+    // define targetId
+    if (typeof(id) === 'object') {
+        target = id;
+    } else if (typeof(id) === 'string') {
+        target = document.getElementById(id);
+    }
+    // inject item to target object
+    return target.innerHTML = item;
 }
 
 /*  Toggle between adding and removing the "responsive" class
