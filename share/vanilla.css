@@ -171,7 +171,7 @@ dl dt {
     font-weight: bold;
 }
 
-.top-navbar a:hover, .nav-logo:hover {
+.top-navbar a:hover {
     background-color: darkslategray;
     color: #f2f2f2;
     text-decoration: underline;
@@ -192,10 +192,12 @@ a:hover {
     text-decoration: underline;
 }
 
-div.nav-home a.nav-home, div.nav-blog a.nav-blog, div.nav-wiki a.nav-wiki, div.nav-sharebook a.nav-sharewiki
+/* div.nav-home a.nav-home,
+div.nav-blog a.nav-blog,
+div.nav-about a.nav-about
 {
     color: white;
-}
+} */
 
 /*  When the screen is less than 600 pixels wide, hide all links,
     except for the first one ("Home"). Show the link that contains
