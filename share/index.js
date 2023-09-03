@@ -7,11 +7,11 @@ let oldNewsItems = document.getElementById('oldNewsItems');
 let navItemBtn = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()');
 
 let navItems = [
-    new PageNavItem('Home','https://liecorp.id'),
-    new PageNavItem('Blog','https://blog.liecorp.id/pages/index.html'),
-    new PageNavItem('Wiki','https://wiki.liecorp.id'),
+    new PageNavItem('Home','https://liecorp.id','nav-home'),
+    new PageNavItem('Blog','https://blog.liecorp.id/pages/index.html','nav-blog'),
+    new PageNavItem('Wiki','https://wiki.liecorp.id','nav-wiki'),
     new PageNavItem('Xenowiki','https://xenomancy.id'),
-    new PageNavItem('Sharebook','https://sharebook.liecorp.id/book/'),
+    new PageNavItem('Sharebook','https://sharebook.liecorp.id/book/','nav-sharebook'),
 ]
 
 let pageBlocks = {
