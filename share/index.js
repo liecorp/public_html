@@ -101,11 +101,10 @@ for ( let i = 0 ; i < newsTitles.length ; i++ ) {
     );
 }
 
-// generateNewsItem(newsItems,newsContent);
-generateNewsItem(newsItems,newsCollections);
+// injectHTML(newsItems, generateNewsItem(newsContent));
 
-generateContent(nginxWelcome,contentObjects[0]);
-generateContent(infoPanel,contentObjects[1]);
-generateContent(primaryBanner,contentObjects[2]);
-
-generateContentNav(topNavbar,navItems,navItemBtn);
+injectHTML(newsItems,       generateNewsItem(newsCollections));
+injectHTML(nginxWelcome,    generateContent(contentObjects[0]));
+injectHTML(infoPanel,       generateContent(contentObjects[1]));
+injectHTML(primaryBanner,   generateContent(contentObjects[2]));
+injectHTML(topNavbar,       generateContentNav(navItems,navItemBtn));

@@ -65,11 +65,9 @@ let blockNginxWelcome = new PageItem(
     'block-nginx'
 )
 
-generateContent(contentBlockPrimary,blockPrimary)
-generateContent(contentBlockSecondary,blockSecondary)
-generateContent(nginxWelcome,blockNginxWelcome)
-
-// If navItemBtn is defined, use:
-generateContentNav(topNavbar,navItems,navItemBtn);
-// Otherwise, use:
-// generateNavContents(navItems);
+injectHTML(contentBlockPrimary,generateContent(blockPrimary))
+injectHTML(contentBlockSecondary,generateContent(blockSecondary))
+injectHTML(nginxWelcome,generateContent(blockNginxWelcome))
+injectHTML(contentBlockSecondary,generateContent(blockSecondary))
+injectHTML(nginxWelcome,generateContent(blockNginxWelcome))
+injectHTML(topNavbar,generateContentNav(navItems,navItemBtn))
