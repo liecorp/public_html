@@ -1,0 +1,65 @@
+{
+	"masterPicture": "share/liecorp-sq-dark.svg",
+	"iconsPath": "/icons",
+	"design": {
+		"ios": {
+			"pictureAspect": "backgroundAndMargin",
+			"backgroundColor": "#000000",
+			"margin": "14%",
+			"assets": {
+				"ios6AndPriorIcons": false,
+				"ios7AndLaterIcons": false,
+				"precomposedIcons": false,
+				"declareOnlyDefaultIcon": true
+			}
+		},
+		"desktopBrowser": {
+			"design": "background",
+			"backgroundColor": "#333333",
+			"backgroundRadius": 0.5,
+			"imageScale": 0.9
+		},
+		"windows": {
+			"pictureAspect": "noChange",
+			"backgroundColor": "#2b5797",
+			"onConflict": "override",
+			"assets": {
+				"windows80Ie10Tile": false,
+				"windows10Ie11EdgeTiles": {
+					"small": false,
+					"medium": true,
+					"big": false,
+					"rectangle": false
+				}
+			}
+		},
+		"androidChrome": {
+			"pictureAspect": "shadow",
+			"themeColor": "#000000",
+			"manifest": {
+				"name": "liecorp.id",
+				"display": "standalone",
+				"orientation": "notSet",
+				"onConflict": "override",
+				"declared": true
+			},
+			"assets": {
+				"legacyIcon": false,
+				"lowResolutionIcons": false
+			}
+		},
+		"safariPinnedTab": {
+			"pictureAspect": "blackAndWhite",
+			"threshold": 19.0625,
+			"themeColor": "#5bbad5"
+		}
+	},
+	"settings": {
+		"scalingAlgorithm": "Mitchell",
+		"errorOnImageTooSmall": false,
+		"readmeFile": true,
+		"htmlCodeFile": true,
+		"usePathAsIs": false
+	}
+}
+
