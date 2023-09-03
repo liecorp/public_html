@@ -151,6 +151,12 @@ dl dt {
     padding: 1em;
 }
 
+.nav-logo:hover {
+    background-color: darkslategray;
+    border-radius: 0.625em;
+    transition-duration: 350ms;
+}
+
 .nav-icon {
     display: none;
 }    
@@ -171,7 +177,7 @@ dl dt {
     font-weight: bold;
 }
 
-.top-navbar a:hover, .nav-logo:hover {
+.top-navbar a:hover {
     background-color: darkslategray;
     color: #f2f2f2;
     text-decoration: underline;
@@ -190,11 +196,6 @@ a {
 
 a:hover {
     text-decoration: underline;
-}
-
-div.nav-home a.nav-home, div.nav-blog a.nav-blog, div.nav-wiki a.nav-wiki, div.nav-sharebook a.nav-sharewiki
-{
-    color: white;
 }
 
 /*  When the screen is less than 600 pixels wide, hide all links,
