@@ -84,6 +84,23 @@ pre {
     margin-top: .25em;
 }
 
+/* From archlinux website */
+dl {
+    clear: both;
+}
+dl dt,dl dd {
+    margin-bottom: 0.25em;
+    padding: 0.5em 0 0.25em;
+    font-weight: bold;
+    border-top: 1px dashed lightblue;
+}
+dl dt {
+    color: #333;
+    float: left;
+    padding-right: 1em;
+}
+/* end from archlinux website */
+
 .content-container {
     display: flex;
     flex-flow: row wrap;

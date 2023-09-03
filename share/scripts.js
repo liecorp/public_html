@@ -53,6 +53,18 @@ function makeNewsItemClass(classTitle,classStamp,classBody) {
     return itemClass;
 }
 
+function makeNewsItemCollection(newsTitle,newsStamp,newsBody = '',newsLink = '#',newsClass = null,newsElement = 'div') {
+    let newsCol = {
+        'title': newsTitle,
+        'stamp': new Date(newsStamp.toString()),
+        'body': newsBody,
+        'href': newsLink,
+        'class': newsClass,
+        'element': newsElement,
+    }
+    return newsCol;
+}
+
 class NewsItem extends PageItem {
     constructor(
         itemTitle,
@@ -77,23 +89,27 @@ class NewsItem extends PageItem {
         }
         return item;
     }
-    makeTitle() {
-        let title = this.itemTitle, href  = this.itemURL, itemClass = this.getClass('title');
-        return `<h4${itemClass}><a href="${href}" title="View full article: ${title}">${title}</a></h4>`;
+    makeHref() {
+        let title = this.itemTitle, href = this.itemURL;
+        return `<a href="${href}" title="View full article: ${title}">${title}</a>`;
     }
-    makeDate() {
-        let date = this.itemDate, isoString, itemClass = this.getClass('stamp');
+    makeTitle() {
+        return `<h4${this.getClass('title')}>${this.makeHref()}</h4>`;
+    }
+    makeIsoString() {
+        let date, isoString;
         if (!date instanceof Date) {
             date = new Date(date.toString());
-        }
-
+        } else { date = this.itemDate };
         // format date into ISO string, see:
         // https://stackoverflow.com/a/29774197/12571203
         const offset = date.getTimezoneOffset();
         date = new Date(date.getTime() - (offset*60*1000));
         isoString = date.toISOString().split('T')[0];
-
-        return `<p${itemClass}>${isoString}</p>`;
+        return isoString;
+    }
+    makeDate() {
+        return `<p${this.getClass('stamp')}>${this.makeIsoString()}</p>`;
     }
     makeBody() {
         let fullDiv, body = this.itemBody, itemClass = this.getClass('body');
@@ -107,6 +123,9 @@ class NewsItem extends PageItem {
             this.makeBody()
             )
         return item.join('');
+    }
+    makeShortList() {
+        return `<dt>${this.makeIsoString()}</dt><dd>${this.makeHref()}</dd>`;
     }
 }
 
@@ -165,15 +184,21 @@ function generateContent(obj) {
     return item;
 }
 
-function generateNewsItem(obj) {
+function generateNewsItem(obj,type = 'post') {
     let item, itemBasket = [];
 
     if (obj instanceof NewsItem) {
-        item = obj.makeItem();
+        switch (type) {
+            case 'list': item = obj.makeShortList(); break;
+            default: item = obj.makeItem(); }
     } else {
         itemBasket = obj.map((n) => {
             if (n instanceof NewsItem) {
-                return n.makeItem()
+                let item;
+                switch (type) {
+                    case 'list': item = n.makeShortList(); break;
+                    default: item = n.makeItem(); }
+                return item;
             }
         });
     }
