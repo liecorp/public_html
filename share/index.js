@@ -4,16 +4,6 @@ let nginxWelcome = document.getElementById('nginxWelcome');
 let newsItems = document.getElementById('newsItems');
 let oldNewsItems = document.getElementById('oldNewsItems');
 
-let navItemBtn = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()');
-
-let navItems = [
-    new PageNavItem('Home','https://liecorp.id'),
-    new PageNavItem('Blog','https://blog.liecorp.id/pages/index.html'),
-    new PageNavItem('Wiki','https://wiki.liecorp.id'),
-    new PageNavItem('Xenowiki','https://xenomancy.id'),
-    new PageNavItem('Sharebook','https://sharebook.liecorp.id/book/'),
-]
-
 let pageBlocks = {
     'nginx': `<h2>Welcome to Nginx!</h2>
 <p>
@@ -92,4 +82,3 @@ injectHTML(oldNewsItems,    newsArray[1]);
 injectHTML(nginxWelcome,    generateContent(contentObjects[0]));
 injectHTML(infoPanel,       generateContent(contentObjects[1]));
 injectHTML(primaryBanner,   generateContent(contentObjects[2]));
-injectHTML(topNavbar,       generateContentNav(navItems,navItemBtn));

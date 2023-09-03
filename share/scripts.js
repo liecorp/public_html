@@ -264,20 +264,3 @@ function injectHTML(id,item) {
     // inject item to target object
     return target.innerHTML = item;
 }
-
-/*  Toggle between adding and removing the "responsive" class
-to top-navbar when the user clicks on the icon */
-function navBarToggle() {
-    let navCont = document.getElementById("navContainer");
-    let topNavbar = document.getElementById("topNavbar");
-    if (topNavbar.className === "top-navbar") {
-        topNavbar.className += " responsive";
-    } else {
-        topNavbar.className = "top-navbar";
-    }
-    if (navCont.className === "nav-container") {
-        navCont.className += " responsive";
-    } else {
-        navCont.className = "nav-container";
-    }
-}
