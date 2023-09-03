@@ -19,11 +19,12 @@ function navBarToggle() {
 let navItemBtn = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()');
 
 let navItems = [
-    new PageNavItem('Home','https://liecorp.id'),
-    new PageNavItem('Blog','https://blog.liecorp.id/pages/index.html'),
-    new PageNavItem('Wiki','https://wiki.liecorp.id'),
-    new PageNavItem('Xenowiki','https://xenomancy.id'),
-    new PageNavItem('Sharebook','https://sharebook.liecorp.id/book/'),
+    new PageNavItem('Home','/','nav-home'),
+    new PageNavItem('Blog','/pages/blog.html','nav-blog'),
+    new PageNavItem('Wiki','/pages/wiki.html','nav-wiki'),
+    new PageNavItem('About','/pages/about.html','nav-about'),
+    // new PageNavItem('Xenowiki','https://xenomancy.id'),
+    // new PageNavItem('Sharebook','https://sharebook.liecorp.id/book/'),
 ]
 
 injectHTML('topNavbar',generateContentNav(navItems,navItemBtn));
