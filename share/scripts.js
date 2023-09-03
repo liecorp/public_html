@@ -1,3 +1,5 @@
+// A base class PageItem, that can consume basic arguments such as target element,
+// target body, and target classes, then produce a string to be inserted with innerHTML
 class PageItem {
     constructor(itemElement,itemBody = null,itemClass = null) {
         this.itemElement = itemElement;
@@ -44,6 +46,9 @@ class PageItem {
     }
 }
 
+// Generate an object that can be consumed by class NewsItem
+// Use this if you want the object to interact properly with
+// NewsItem constructor
 function makeNewsItemClass(classTitle,classStamp,classBody) {
     let itemClass = {
         'title': classTitle,
@@ -53,7 +58,12 @@ function makeNewsItemClass(classTitle,classStamp,classBody) {
     return itemClass;
 }
 
-function makeNewsItemCollection(newsTitle,newsStamp,newsBody = '',newsLink = '#',newsClass = null,newsElement = 'div') {
+// A function to produce an object that can easily be parsed into a NewsItem class
+// Note that the newsClass argument expects to receive an object created by makeNewsItemClass()
+function makeNewsItemCollection( newsTitle, newsStamp, newsBody = '', newsLink = '#',
+            newsClass = makeNewsItemClass('content-news-head','content-timestamp','content-news-body'),
+            newsElement = 'div')
+{
     let newsCol = {
         'title': newsTitle,
         'stamp': new Date(newsStamp.toString()),
@@ -65,6 +75,7 @@ function makeNewsItemCollection(newsTitle,newsStamp,newsBody = '',newsLink = '#'
     return newsCol;
 }
 
+// A special case of PageItem where the html block being produced will be used in a post format
 class NewsItem extends PageItem {
     constructor(
         itemTitle,
@@ -129,6 +140,8 @@ class NewsItem extends PageItem {
     }
 }
 
+// Special class that extends from PageItem, specifically made to handle
+// the creation of a navbar.
 class PageNavItem extends PageItem {
     constructor(itemBody,itemURL = '#', itemClass = null, itemOnClick = null, itemElement = 'a') {
         super(itemElement, itemBody, itemClass);
@@ -152,6 +165,9 @@ class PageNavItem extends PageItem {
     }
 }
 
+// Generate nav html block from an array, where each array item
+// is a member of class PageNavItem. Optionally include a responsive
+// button object.
 function generateContentNav(objArr,btn = 'default') {
     let itemBtn, sourceObj, navArr = [], navItem;
 
@@ -176,6 +192,8 @@ function generateContentNav(objArr,btn = 'default') {
     return navItem = navArr.join('');
 }
 
+// expects object that is a part of class PageItem
+// produces a fully formed div
 function generateContent(obj) {
     let item;
     if (obj instanceof PageItem) {
@@ -184,6 +202,11 @@ function generateContent(obj) {
     return item;
 }
 
+// expects object that is a part of class NewsItem
+// Produces a string of news content. Has two formats:
+// - 'post' format is the default, fully formed div
+// - 'list' format is for definition list style, meant to be
+//          contained in a <dl> tag
 function generateNewsItem(obj,type = 'post') {
     let item, itemBasket = [];
 
@@ -207,6 +230,29 @@ function generateNewsItem(obj,type = 'post') {
     return item;
 }
 
+// Expect to be fed objects created by makeNewsItemCollection()
+// Essentially transform objects created by makeNewsItemCollection()
+// into NewsItem objects and split them into an array of strings:
+// [0]: in post form
+// [1]: in definition list form
+function generateNewsArray(arr,limit = 3) {
+    let newsLatest = [], newsOlder = [], latest,older;
+    for ( let i = 0 ; i < news.length ; i++ ) {
+        if (i < limit) {
+            newsLatest.push(new NewsItem(arr[i].title,arr[i].stamp,arr[i].body,arr[i].href,arr[i].class,arr[i].element));
+        } else {
+            newsOlder.push(new NewsItem(arr[i].title,arr[i].stamp,arr[i].body,arr[i].href,arr[i].class,arr[i].element));
+        }
+    }
+
+    latest = generateNewsItem(newsLatest);
+    older = generateNewsItem(newsOlder,'list');
+
+    return [ latest, older ];
+}
+
+// A specialized tool to inject html blocks into a specified class
+// Item must be a string
 function injectHTML(id,item) {
     let target;
     // define targetId

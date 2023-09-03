@@ -1,6 +1,9 @@
 let primaryBanner = document.getElementById("primaryBanner");
 let infoPanel = document.getElementById("infoPanel");
 let nginxWelcome = document.getElementById('nginxWelcome');
+let newsItems = document.getElementById('newsItems');
+let oldNewsItems = document.getElementById('oldNewsItems');
+
 let navItemBtn = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()');
 
 let navItems = [
@@ -11,65 +14,47 @@ let navItems = [
     new PageNavItem('Sharebook','https://sharebook.liecorp.id/book/'),
 ]
 
-let pageBlocks = [
-    `<h2>Welcome to Nginx!</h2>
-    <p>
-    If you see this page, the nginx web server is successfully installed and working.
-        Further configuration is required.
-    </p>
-    <p>For online documentation and support please refer to
-    <a class="navbar-link" class="link-light" href="http://nginx.org/">nginx.org</a>.<br/>
-    Commercial support is available at
-        <a class="navbar-link" class="link-light" href="http://nginx.com/">nginx.com</a>.</p>
+let pageBlocks = {
+    'nginx': `<h2>Welcome to Nginx!</h2>
+<p>
+If you see this page, the nginx web server is successfully installed and working.
+    Further configuration is required.
+</p>
+<p>For online documentation and support please refer to
+<a class="navbar-link" class="link-light" href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+    <a class="navbar-link" class="link-light" href="http://nginx.com/">nginx.com</a>.</p>
 
-    <p><em>Thank you for using nginx.</em></p>`,
-    `<h2>
-        Secondary Block
-    </h2>
-    <p>
-        The content should not matter much.
-        What is important is that this section should not be a primary one.
-        It should contain extra contents not vital to be not present.
-    </p>`,
-    `<h2 class="heading">A simple, lightweight webpage</h2>
+<p><em>Thank you for using nginx.</em></p>`,
+    'info': `<h2>Secondary Block</h2>
+<p>
+    The content should not matter much.
+    What is important is that this section should not be a primary one.
+    It should contain extra contents not vital to be not present.
+</p>`,
+    'primary': `<h2 class="heading">A simple, lightweight webpage</h2>
 
-    <p>You've reached the website for <strong>liecorp.id</strong>, hosted in a
-    lightweight and flexible Linux server that tries to Keep It
-    Simple.</p>
+<p>You've reached the website for <strong>liecorp.id</strong>, hosted in a
+lightweight and flexible Linux server that tries to Keep It
+Simple.</p>
 
-    <p>Currently we have several pages live and available to access from our simple
-    navigation bar. Feel free to check for them. Though note that they are mostly
-    work in progress.</p>
+<p>Currently we have several pages live and available to access from our simple
+navigation bar. Feel free to check for them. Though note that they are mostly
+work in progress.</p>
 
-    <p>This page is served with an nginx web server. Some of the other sites here are
-    served with nginx inside docker containers, especially the ones with php as their
-    backend. Those sites served from within docker containers are then configured to
-    their respective subdomains with native nginx web server and simple reverse proxy
-    configurations.</p>`
-]
+<p>This page is served with an nginx web server. Some of the other sites here are
+served with nginx inside docker containers, especially the ones with php as their
+backend. Those sites served from within docker containers are then configured to
+their respective subdomains with native nginx web server and simple reverse proxy
+configurations.</p>`
+}
 
 let contentObjects = [
-    new PageItem('div',pageBlocks[0],'nginx-welcome'),
-    new PageItem('div',pageBlocks[1],'info-panel'),
-    new PageItem('div',pageBlocks[2],'primary-banner'),
+    new PageItem('div',pageBlocks.nginx,'nginx-welcome'),
+    new PageItem('div',pageBlocks.info,'info-panel'),
+    new PageItem('div',pageBlocks.primary,'primary-banner'),
 ]
 
-let newsClasses = makeNewsItemClass('content-news-head','content-timestamp','content-news-body');
-let newsTitles = [
-    'ansible-core &gt;= 2.15.3-1 update may require manual intervention',
-    'budgie-desktop &gt;= 10.7.2-6 update requires manual intervention',
-    'TeX Live package reorganization',
-];
-let newsUrls = [
-    "/news/ansible-core-2153-1-update-may-require-manual-intervention/",
-    "/news/budgie-desktop-1072-6-update-requires-manual-intervention/",
-    "/news/tex-live-package-reorganization/",
-]
-let newsStamps = [
-    new Date('2023-08-19 03:25:22 UTC+8'),
-    new Date('2023-08-11 03:53:45 UTC+7'),
-    new Date('2023-06-18 1:36:27 UTC+3'),
-];
 let newsBodies  = [
     `<p>As of <code>ansible-core 2.15.3</code>, upstream moved documentation and examples to a separate <a href="https://github.com/ansible/ansible-documentation">dedicated repository</a> (see the <a href="https://github.com/ansible/ansible/blob/v2.15.3/changelogs/CHANGELOG-v2.15.rst#minor-changes">related changelogs</a>).<br />
     This means that, starting from version <code>2.15.3</code> the <code>ansible-core</code> package will stop shipping documentation and a default configuration example under <code>/etc/ansible/ansible.cfg</code>.</p>
@@ -90,35 +75,20 @@ collection:  collection-latexrecommended</code></pre>
     <p>which means the euler CTAN package is contained in <code>texlive-latexrecommended</code>. You may also use <code>pacman -F</code> to query for specific files.</p>
     <p>A new metapackage texlive-meta is available to install all subpackages (except for …</p>`,
 ]
-let newsItems = document.getElementById('newsItems');
-let oldNewsItems = document.getElementById('oldNewsItems')
-let newsContent = new NewsItem(newsTitles[0],newsStamps[0],newsBodies[0],newsUrls[0]);
 
-
-let oldNews = [
-    makeNewsItemCollection('Git migration announcement','2023-05-15 13:42:11 UTC+7','dummy',"/news/switch-to-the-base-devel-meta-package-requires-manual-intervention/"),
-    makeNewsItemCollection('PHP 8.2 update and introduction of legacy branch','2023-01-13 13:42:11 UTC+7','dummy',"/news/php-82-update-and-introduction-of-legacy-branch/"),
-    makeNewsItemCollection('In memory of Jonathon Fernyhough','2023-01-12 13:42:11 UTC+7','dummy',"/news/in-memory-of-jonathon-fernyhough/"),
+let news = [
+    makeNewsItemCollection('ansible-core &gt;= 2.15.3-1 update may require manual intervention','2023-08-19 03:25:22 UTC+8',newsBodies[0],"/news/ansible-core-2153-1-update-may-require-manual-intervention/"),
+    makeNewsItemCollection('budgie-desktop &gt;= 10.7.2-6 update requires manual intervention','2023-08-11 03:53:45 UTC+7',newsBodies[1],"/news/budgie-desktop-1072-6-update-requires-manual-intervention/"),
+    makeNewsItemCollection('TeX Live package reorganization','2023-06-18 1:36:27 UTC+3',newsBodies[2],"/news/tex-live-package-reorganization/"),
+    makeNewsItemCollection('Git migration announcement','2023-05-15 13:42:11 UTC+7',pageBlocks.nginx,"/news/switch-to-the-base-devel-meta-package-requires-manual-intervention/"),
+    makeNewsItemCollection('PHP 8.2 update and introduction of legacy branch','2023-01-13 13:42:11 UTC+7',pageBlocks.info,"/news/php-82-update-and-introduction-of-legacy-branch/"),
+    makeNewsItemCollection('In memory of Jonathon Fernyhough','2023-01-12 13:42:11 UTC+7',pageBlocks.primary,"/news/in-memory-of-jonathon-fernyhough/"),
 ]
 
-let newsCollections = [];
-for ( let i = 0 ; i < newsTitles.length ; i++ ) {
-    newsCollections.push(
-        new NewsItem(newsTitles[i],newsStamps[i],newsBodies[i],newsUrls[i])
-    );
-}
+newsArray = generateNewsArray(news,3);
+injectHTML(newsItems,       newsArray[0]);
+injectHTML(oldNewsItems,    newsArray[1]);
 
-let oldNewsCollections = [];
-for (let i = 0; i < oldNews.length; i++ ) {
-    oldNewsCollections.push(
-        new NewsItem(oldNews[i].title,oldNews[i].stamp,oldNews[i].body,oldNews[i].href)
-    );
-}
-
-// injectHTML(newsItems, generateNewsItem(newsContent));
-
-injectHTML(newsItems,       generateNewsItem(newsCollections));
-injectHTML(oldNewsItems,    generateNewsItem(oldNewsCollections,'list'));
 injectHTML(nginxWelcome,    generateContent(contentObjects[0]));
 injectHTML(infoPanel,       generateContent(contentObjects[1]));
 injectHTML(primaryBanner,   generateContent(contentObjects[2]));
