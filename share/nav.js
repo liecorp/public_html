@@ -16,6 +16,31 @@ function navBarToggle() {
     }
 }
 
+// Contact api endpoint and make navbar
+// optionally takes a custom nav button as its second argument
+async function makeNav(navApi, navBtn = 'default') {
+    fetch(navApi)
+        .then(item => {
+            // if endpoint is resolved, convert to json
+            if (item.ok) {
+                return item.json()
+            }
+        })
+        .then(item => {
+            // map item into objects of class PageNavItem
+            return item.map(obj => {
+                return new PageNavItem(obj.name,obj.route,obj.navclass)
+            });
+        })
+        .then(nav => {
+            // if mapping is successful, generate contents of navbar
+            return generateContentNav(nav, navBtn);
+        })
+        // insert into navbar
+        .then(navbar => injectHTML('topNavbar',navbar))
+        .catch((e) => { return 'error:' + e.message; });
+}
+
 let navItemBtn = new PageNavItem('<i class="fa fa-bars"></i>','javascript:void(0)','nav-icon','navBarToggle()');
 
 let navItems = [
@@ -27,4 +52,4 @@ let navItems = [
     // new PageNavItem('Sharebook','https://sharebook.liecorp.id/book/'),
 ]
 
-injectHTML('topNavbar',generateContentNav(navItems,navItemBtn));
+makeNav('http://localhost:8088/api/navbar')
