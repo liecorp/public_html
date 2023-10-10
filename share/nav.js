@@ -52,4 +52,4 @@ let navItems = [
     // new PageNavItem('Sharebook','https://sharebook.liecorp.id/book/'),
 ]
 
-makeNav('http://localhost:8088/api/navbar')
+makeNav('https://liecorp.id/api/navbar')
