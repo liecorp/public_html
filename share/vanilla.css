@@ -20,7 +20,7 @@ pre {
     margin: 1em;
 }
 
-.heading {
+.heading, .primary-banner h2 {
     border-bottom: 1px solid gray;
     padding-bottom: 0.2em;
 }
@@ -84,6 +84,10 @@ pre {
     margin-top: .25em;
 }
 
+.content-news-body h2 {
+    font-size: 1em;
+}
+
 /* From archlinux website */
 dl {
     clear: both;
@@ -117,6 +121,10 @@ dl dt {
 
 .panel-right {
     flex: 1 1 15em;
+}
+
+div.primary-banner .article-info{
+    margin:0;color:#999;
 }
 
 .content-box {
@@ -192,12 +200,164 @@ a:hover {
     text-decoration: underline;
 }
 
+.side-navbar {
+    background-color: #ffd;
+    border-radius: 0.3em;
+}
+
+.side-navbar a {
+    float: none;
+    display: block;
+    /* color:#333; */
+    text-align: left;
+    padding: .5em;
+    text-decoration: none;
+    font-size: 1em;
+    /* font-weight: bold; */
+}
+
+.side-navbar a:hover {
+    background-color: #e4eeff;
+    /* color: #f2f2f2; */
+    text-decoration: underline;
+    /* border-radius: 0.625em; */
+    /* transition-duration: 350ms; */
+}
+
+/* To make button looks and behave like link.
+   See https://stackoverflow.com/a/22076149/12571203
+   I apologize for the css monstrosity below */
+
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    /* color: #0000EE; */
+    color: slateblue;
+    padding: 0;
+    /* text-decoration: underline; */
+    text-decoration: none;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+}
+
+.btn-like {
+    border-radius: 0.3em;
+    background-color: #ffd;
+    display: block;
+    padding: .5em;
+    text-align: center;
+}
+
+.btn-block {
+    background-color: hotpink;
+    border-radius: 0.3em;
+    display: block;
+    padding: .5em;
+    color: #ffd;
+}
+
+.btn-like:hover {
+    background-color: #e4eeff;
+    text-decoration: underline;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+    color: lightgoldenrodyellow;
+}
+
+.btn-block:hover {
+    background-color: crimson;
+}
+
+.btn-delete.btn-index-action {
+    color: crimson;
+}
+
+/* Button like link, done */
+
+.width-100-pct {
+    width: 100%;
+}
+
 .nav-home a.nav-home,
 .nav-blog a.nav-blog,
 .nav-wiki a.nav-wiki,
 .nav-about a.nav-about
 {
     color: white;
+}
+
+/* This area is for content tables */
+
+.news-nav {
+    float:right;
+    margin-top:-2.5em;
+}
+
+table {
+    width:100%;
+    border-collapse:collapse;
+}
+
+table.results {
+    font-size:.846em;
+    border-top:1px dotted #999;
+    border-bottom:1px dotted #999;
+}
+
+th,td {
+    white-space:nowrap;
+    text-align:left;
+}
+
+th {vertical-align:middle;
+    font-weight:bold;
+}
+
+td {
+    vertical-align:top;
+}
+
+#article-list tr:hover,
+#clocks-table tr:hover,
+#dev-dashboard tr:hover,
+#dev-todo-lists tr:hover,
+#dev-todo-pkglist tr:hover,
+#pkglist-results tr:hover,
+#stats-area tr:hover {
+    background:#ffd;
+}
+
+.results tr:nth-child(even),
+#article-list tr:nth-child(even) {
+    background:#e4eeff;
+}
+
+.results tr:nth-child(odd),
+#article-list tr:nth-child(odd) {
+    background:#fff;
+}
+.results th {
+    padding:.5em 1em .25em .25em;
+    border-bottom:1px solid #999;
+    white-space:nowrap;
+    background-color:#fff;
+}
+
+.results td {
+    padding:.3em 1em .3em 3px;
+}
+
+.results .flagged {
+    color:red;
+}
+
+.results tr.empty td{
+    text-align:center;
 }
 
 /*  When the screen is less than 600 pixels wide, hide all links,
