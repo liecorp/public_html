@@ -41,7 +41,7 @@ class PageItem {
     }
     makeItem() {
         let item;
-        item = this.makeElement(this.makeProps(),this.itemBody);
+        item = this.makeElement(this.makeProps(),this.makeBody());
         return item;
     }
 }
@@ -73,6 +73,31 @@ function makeNewsItemCollection( newsTitle, newsStamp, newsBody = '', newsLink =
         'element': newsElement,
     }
     return newsCol;
+}
+
+// A special case of PageItem where title is separated from body
+
+class PostItem extends PageItem {
+    constructor(itemElement,itemTitle = null, itemBody = null,itemClass = null) {
+        super(itemElement,itemBody,itemClass);
+        this.itemTitle = itemTitle;
+    }
+
+    makeTitle() {
+        return `<h2>${this.itemTitle}</h2>`;
+    }
+
+    makeBody() {
+        if (this.itemBody) {
+            return this.itemBody;
+        }
+    }
+
+    makeItem() {
+        let item;
+        item = this.makeElement(this.makeProps(),this.makeTitle()+this.makeBody());
+        return item;
+    }
 }
 
 // A special case of PageItem where the html block being produced will be used in a post format
@@ -196,7 +221,7 @@ function generateContentNav(objArr,btn = 'default') {
 // produces a fully formed div
 function generateContent(obj) {
     let item;
-    if (obj instanceof PageItem) {
+    if (obj instanceof PageItem || obj instanceof PostItem) {
         item = obj.makeItem();
     }
     return item;
@@ -237,7 +262,7 @@ function generateNewsItem(obj,type = 'post') {
 // [1]: in definition list form
 function generateNewsArray(arr,limit = 3) {
     let newsLatest = [], newsOlder = [], latest,older;
-    for ( let i = 0 ; i < news.length ; i++ ) {
+    for ( let i = 0 ; i < arr.length ; i++ ) {
         if (i < limit) {
             newsLatest.push(new NewsItem(arr[i].title,arr[i].stamp,arr[i].body,arr[i].href,arr[i].class,arr[i].element));
         } else {
